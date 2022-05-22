@@ -21,3 +21,15 @@
      debug:
        msg: URL = {{ URL }}
 
+- name: Demo on Variable from user input
+  hosts: all
+  vars_prompt:
+    - name: URL
+      prompt: Enter URL
+      private:no
+  tasks:
+   - name: Print Variable
+     debug:
+       msg: URL = {{ URL }}
+
+
