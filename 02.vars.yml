@@ -27,9 +27,15 @@
     - name: URL
       prompt: Enter URL
       private: no
+
   tasks:
    - name: Print Variable
      debug:
        msg: URL = {{ URL }}
 
-
+- name : Demo on Variables from inventory
+  hosts: all
+  tasks:
+    - name: Print variable
+      debug:
+        msg: URL ={{ URL }}
