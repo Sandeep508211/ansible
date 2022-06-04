@@ -5,12 +5,12 @@
   tasks:
   - name: Print Variable
     debug:
-      msg: URL = {{ URL }}
+      msg: URL ={{ URL }}
   - name: Print Variable from task
     vars:
       URL: task.example.com
     debug:
-      msg: URL = {{ URL }}
+      msg: URL ={{ URL }}
 
 - name: Demo on Variables from files
   hosts: all
@@ -19,7 +19,7 @@
   tasks:
    - name: Print Variable
      debug:
-       msg: URL = {{ URL }}
+       msg: URL ={{ URL }}
 
 - name: Demo on Variable from user input
   hosts: all
@@ -30,7 +30,7 @@
   tasks:
    - name: Print Variable
      debug:
-       msg: URL = {{ URL }}
+       msg: URL ={{ URL }}
 
 - name : Demo on Variables from inventory
   hosts: all
