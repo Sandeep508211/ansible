@@ -27,7 +27,6 @@
     - name: URL
       prompt: Enter URL
       private: no
-
   tasks:
    - name: Print Variable
      debug:
