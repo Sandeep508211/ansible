@@ -47,6 +47,13 @@
       debug:
         msg: python version ={{ ansible_python_version }}
 
+- name: Register a variable
+  hosts: all
+  tasks:
+    - name: user logged in
+      shell: who | wc -1
+      register: out
+
 
 
 
