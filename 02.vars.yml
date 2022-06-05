@@ -3,14 +3,14 @@
   vars:
     URL: play.example.com
   tasks:
-  - name: Print Variable
-    debug:
-      msg: URL ={{ URL }}
-  - name: Print Variable from task
-    vars:
-      URL: task.example.com
-    debug:
-      msg: URL ={{ URL }}
+   - name: Print Variable
+     debug:
+       msg: URL = {{ URL }}
+   - name: Print Variable from task
+     vars:
+       URL: task.example.com
+     debug:
+       msg: URL = {{ URL }}
 
 - name: Demo on Variables from files
   hosts: all
@@ -19,49 +19,43 @@
   tasks:
    - name: Print Variable
      debug:
-       msg: URL ={{ URL }}
+       msg: URL = {{ URL }}
 
-- name: Demo on Variable from user input
+- name: Demo on Variables from user input
   hosts: all
   vars_prompt:
     - name: URL
       prompt: Enter URL
       private: no
   tasks:
-   - name: Print variable
+   - name: Print Variable
      debug:
-       msg: URL == {{ URL }}
+       msg: URL = {{ URL }}
 
-- name : Demo on variables from inventory
+- name: Demo on variabe from inventory
   hosts: all
   tasks:
     - name: Print variable
       debug:
-        msg: URL == {{ URL }}
+        msg: URL ={{ URL }}
 
 - name: Print Fact
   hosts: all
   tasks:
     - name: Print fact
       debug:
-        msg: Python Version = {{ ansible_python_version }}
+        msg: python version ={{ ansible_python_version }}
 
 - name: Register a variable
   hosts: all
   tasks:
     - name: user loggied in
-      shell: who | wc -1
+      shell: who | wc -l
       register: out
 
     - name: Print Out
       debug:
         msg: Number of user login = {{ out.stdout }}
-
-
-
-
-
-
 
 
 
