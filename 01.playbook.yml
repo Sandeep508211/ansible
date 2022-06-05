@@ -3,4 +3,4 @@
   tasks:
     - name: print Hello World
       debug:
-        mgs: Hello World
+        msg: Hello World
