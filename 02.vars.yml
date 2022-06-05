@@ -28,11 +28,11 @@
       prompt: Enter URL
       private: no
   tasks:
-   - name: Print Variable
+   - name: Print variable
      debug:
        msg: URL ={{ URL }}
 
-- name : Demo on Variables from inventory
+- name : Demo on variables from inventory
   hosts: all
   tasks:
     - name: Print variable
@@ -49,9 +49,10 @@
 - name: Register a variable
   hosts: all
   tasks:
-    - name: user logged in
+    - name: user loggied in
       shell: who | wc -1
       register: out
+
     - name: Print Out
       debug:
         msg: Number of user login = {{ out.stdout }}
