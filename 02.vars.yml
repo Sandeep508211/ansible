@@ -44,7 +44,7 @@
   tasks:
     - name: Print fact
       debug:
-        msg: python version ={{ ansible_python_version }}
+        msg: python version = {{ ansible_python_version }}
 
 - name: Register a variable
   hosts: all
