@@ -30,21 +30,21 @@
   tasks:
    - name: Print variable
      debug:
-       msg: URL ={{ URL }}
+       msg: URL == {{ URL }}
 
 - name : Demo on variables from inventory
   hosts: all
   tasks:
     - name: Print variable
       debug:
-        msg: URL ={{ URL }}
+        msg: URL == {{ URL }}
 
 - name: Print Fact
   hosts: all
   tasks:
     - name: Print fact
       debug:
-        msg: python version = {{ ansible_python_version }}
+        msg: Python Version = {{ ansible_python_version }}
 
 - name: Register a variable
   hosts: all
