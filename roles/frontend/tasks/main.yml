@@ -1,0 +1,12 @@
+- name: Install the latest version of nginx
+  yum:
+    name: nginx
+    state: latest
+
+- name: Download Packages
+  include_role:
+    name: common
+    tasks_from: download-from-github
+  vars:
+    APP_DIR: /usr/share/nginx/html
+    EXTRACT_DIR: /usr/share/nginx
