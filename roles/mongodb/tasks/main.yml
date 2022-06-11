@@ -1,0 +1,42 @@
+- name: Add Mingodb repository
+  yum_repository:
+    name: MongoDB
+    description: MongoDB Repository
+    baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://www.mongodb.org/static/pgp/server-4.2.asc
+    file: mongodb
+
+- name: Install MongoDB
+  yum:
+    name: mongodb-org
+    state: present
+
+- name: Update MongoDB Listen Address
+  replace:
+    path: /etc/mongod.conf
+    regexp: 127.0.0.1
+    replace: 0.0.0.0
+
+- name: Start MonDB service
+  systemd:
+    name: mongod
+    enabled: yes
+    state: started
+
+- name: Download Packages
+  include_role:
+    name: common
+    tasks_from: download-from-github
+  vars:
+    APP_DIR: /tmp/mongodb-main
+    EXTRACT_DIR: /tmp
+
+- name: Load Schema
+  community.mongodb.mongodb_shell:
+    d : "/tmp/mongodb-main/{{item}}"
+    idempotent: yes
+  loop:
+    - users.js
+    - catalogue.js
