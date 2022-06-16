@@ -1,0 +1,46 @@
+- name: Install Maven
+  yum:
+    name:
+      - maven
+    state: installed
+
+- name: Add Roboshop User
+  ansible.builtin.user:
+    name: roboshop
+    comment: Roboshop Project User
+
+- name: Download Packages
+  include_role:
+    name: common
+    tasks_from: download-from-github
+  vars:
+    APP_DIR: /home/roboshop/{{COMPONENT}}
+    EXTRACT_DIR: /home/roboshop
+
+- name: Copy Content to actual directory
+  copy:
+    src: /home/roboshop/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes
+  become_user: roboshop
+
+
+- name: Build a Packages with maven
+  shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar shipping.jar
+  args:
+    chdir: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
+
+- name: Copy Systemd file
+  copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: start {{COMPONENT}} Service
+  systemd:
+     name: "{{COMPONENT}}"
+     state: restarted
+     enabled: yes
+     daemon_reload: yes
+
+#
