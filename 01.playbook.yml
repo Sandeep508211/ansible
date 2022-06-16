@@ -1,6 +1,59 @@
-- name: Demo on playbook
+- name: Demo on Variables
+  hosts: all
+  vars:
+    URL: play.example.com
+  tasks:
+    - name: Print Variable
+      debug:
+        msg: URL = {{ URL }}
+    - name: Print Variable from task
+      vars:
+        URL: task.example.com
+      debug:
+        msg: URL = {{ URL }}
+
+- name: Demo on Variables from files
+  hosts: all
+  vars_files:
+    - example-vars.yml
+  tasks:
+    - name: Print Variable
+      debug:
+        msg: URL = {{ URL }}
+
+- name: Demo on Variables from user input
+  hosts: all
+  vars_prompt:
+    - name: URL
+      prompt: Enter URL
+      private: no
+  tasks:
+    - name: Print Variable
+      debug:
+        msg: URL = {{ URL }}
+
+- name: Demo on variabe from inventory
   hosts: all
   tasks:
-    - name: print Hello World
+    - name: Print variable
       debug:
-        msg: Hello World
+        msg: URL ={{ URL }}
+
+- name: Print Fact
+  hosts: all
+  tasks:
+    - name: Print fact
+      debug:
+        msg: python version ={{ ansible_python_version }}
+
+- name: Register a variable
+  hosts: all
+  tasks:
+    - name: user loggied in
+      shell: who | wc -l
+      register: out
+
+    - name: Print Out
+      debug:
+        msg: Number of user login = {{ out.stdout }}
+
