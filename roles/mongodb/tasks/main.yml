@@ -1,4 +1,4 @@
-- name: Add Mingodb repository
+- name: Add Mongodb repository
   yum_repository:
     name: MongoDB
     description: MongoDB Repository
