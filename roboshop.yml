@@ -16,7 +16,7 @@
     - name: Load Mongodb Role
       role: mongodb
 
-- name: Setup roboshop project -- Catalogue  Component
+- name: Setup roboshop project -- Catalogue Component
   hosts: CATALOGUE
   become: yes
   tags:
@@ -24,4 +24,13 @@
   roles:
     - name: Load Catalogue Role
       role: catalogue
+
+- name: Setup roboshop project -- redis  Component
+  hosts: REDIS
+  become: yes
+  tags:
+    - redis
+  roles:
+    - name: Load Redis Role
+      role: redis
 
